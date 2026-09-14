@@ -1,25 +1,7 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Projects from "@/components/Projects";
-import TechStack from "@/components/TechStack";
-import About from "@/components/About";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import { redirect } from 'next/navigation';
 
-export default function Home() {
-  return (
-    <>
-      <Navbar />
-      <main>
-        
-        <Hero />
-       
-        <Projects />
-        <TechStack />
-        <About />
-        <Contact />
-      </main>
-      <Footer />
-    </>
-  );
+// The root path is handled by proxy.ts (locale routing).
+// This redirect is a build-time fallback for static prerendering.
+export default function RootPage() {
+  redirect('/en');
 }
