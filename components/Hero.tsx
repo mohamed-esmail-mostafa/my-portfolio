@@ -1,6 +1,10 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 export default function Hero() {
+  const t = useTranslations('hero');
+
   return (
     <section
       style={{
@@ -36,7 +40,7 @@ export default function Hero() {
           textTransform: 'uppercase',
           marginBottom: 24,
         }}>
-          Full-Stack Developer
+          {t('badge')}
         </p>
 
         <h1 style={{
@@ -48,7 +52,7 @@ export default function Hero() {
           marginBottom: 24,
           textTransform: 'uppercase',
         }}>
-          Full-Stack Web &<br />App Developer
+          {t('title')}
         </h1>
 
         <p style={{
@@ -58,8 +62,7 @@ export default function Hero() {
           maxWidth: 520,
           margin: '0 auto 40px',
         }}>
-          Hi, I'm Mohamed. I build modern web platforms, scalable SaaS products,
-          mobile applications, and custom software that drive business growth.
+          {t('description')}
         </p>
 
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -80,7 +83,7 @@ export default function Hero() {
             onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.85')}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
           >
-            View Projects
+            {t('cta_projects')}
           </a>
           <a
             href="#contact"
@@ -100,7 +103,7 @@ export default function Hero() {
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--text-secondary)')}
             onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--border-hover)')}
           >
-            Let's Work Together
+            {t('cta_contact')}
           </a>
         </div>
       </div>

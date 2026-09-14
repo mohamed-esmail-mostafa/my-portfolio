@@ -1,30 +1,28 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-
-const navLinks = [
-  { href: '#projects', label: 'Projects' },
-  { href: '#about', label: 'About' },
-  { href: '#stack', label: 'Stack' },
-  { href: '#contact', label: 'Contact' },
-];
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
+import Logo from './Logo';
 
 export default function Navbar() {
+  const t = useTranslations('nav');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState('');
+
+  const navLinks = [
+    { href: '#projects', label: t('projects') },
+    { href: '#about', label: t('about') },
+    { href: '#stack', label: t('stack') },
+    { href: '#contact', label: t('contact') },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const handleNav = (href: string) => {
-    setActive(href);
-    setMenuOpen(false);
-  };
 
   return (
     <header
@@ -48,24 +46,27 @@ export default function Navbar() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        gap: 16,
       }}>
-        <span style={{
+        {/* <span style={{
           fontSize: 14,
           fontWeight: 600,
-          letterSpacing: '0.08em',
+          letterSpacing: '0.06em',
           color: 'var(--text-primary)',
           textTransform: 'uppercase',
+          flexShrink: 0,
         }}>
-          Mohamed Ismail
-        </span>
+          {t('name')}
+        </span> */}
+        <Logo />
 
         {/* Desktop nav */}
-        <nav style={{ display: 'flex', gap: 4 }} className="hide-mobile">
+        <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }} className="hide-mobile">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              onClick={() => handleNav(link.href)}
+              onClick={() => setActive(link.href)}
               style={{
                 padding: '6px 14px',
                 borderRadius: 6,
@@ -81,7 +82,7 @@ export default function Navbar() {
               onMouseEnter={(e) => {
                 if (active !== link.href) {
                   (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-                  (e.currentTarget as HTMLElement).style.background = 'var(--border)';
+                  (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
                 }
               }}
               onMouseLeave={(e) => {
@@ -94,29 +95,26 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <LanguageSwitcher />
         </nav>
 
-        {/* Mobile hamburger */}
-        <button
-          className="show-mobile"
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: 8,
-            color: 'var(--text-primary)',
-          }}
-          aria-label="Toggle menu"
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            {menuOpen ? (
-              <path fillRule="evenodd" clipRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
-            ) : (
-              <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
-            )}
-          </svg>
-        </button>
+        {/* Mobile: switcher + hamburger */}
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }} className="show-mobile">
+          <LanguageSwitcher />
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, color: 'var(--text-primary)' }}
+            aria-label="Toggle menu"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              {menuOpen ? (
+                <path fillRule="evenodd" clipRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
+              ) : (
+                <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -136,7 +134,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              onClick={() => handleNav(link.href)}
+              onClick={() => { setActive(link.href); setMenuOpen(false); }}
               style={{
                 padding: '12px 16px',
                 borderRadius: 8,

@@ -6,75 +6,64 @@ export default function useSkills() {
         {
             name: "Laravel",
             slug: "laravel",
-            icon: "/images/skills/laravel.png",
+            icon: "/skills/laravel-svgrepo-com.svg",
             category: "Backend",
         },
         {
             name: "PHP",
             slug: "php",
-            icon: "/images/skills/php.png",
+            icon: "/skills/php2-svgrepo-com.svg",
             category: "Backend",
         },
         {
             name: "Node.js",
             slug: "nodejs",
-            icon: "/images/skills/nodejs.png",
+            icon: "/skills/node-js-svgrepo-com.svg",
             category: "Backend",
         },
         {
             name: "NestJS",
             slug: "nestjs",
-            icon: "/images/skills/nestjs.png",
+            icon: "/skills/nest-middleware-js-svgrepo-com.svg",
             category: "Backend",
         },
-        {
-            name: "REST API",
-            slug: "rest-api",
-            icon: "/images/skills/rest-api.png",
-            category: "Backend",
-        },
+
 
         // Frontend
         {
             name: "React",
             slug: "react",
-            icon: "/images/skills/react.png",
-            category: "Frontend",
-        },
-        {
-            name: "Inertia.js",
-            slug: "inertiajs",
-            icon: "/images/skills/inertiajs.png",
+            icon: "/skills/react-svgrepo-com.svg",
             category: "Frontend",
         },
         {
             name: "TypeScript",
             slug: "typescript",
-            icon: "/images/skills/typescript.png",
+            icon: "/skills/typescript-icon-svgrepo-com.svg",
             category: "Frontend",
         },
         {
             name: "JavaScript",
             slug: "javascript",
-            icon: "/images/skills/javascript.png",
+            icon: "/skills/js-svgrepo-com.svg",
             category: "Frontend",
         },
         {
             name: "Tailwind CSS",
             slug: "tailwindcss",
-            icon: "/images/skills/tailwindcss.png",
+            icon: "/skills/tailwind-svgrepo-com.svg",
             category: "Frontend",
         },
         {
             name: "HTML",
             slug: "html",
-            icon: "/images/skills/html.png",
+            icon: "/skills/html-5-svgrepo-com.svg",
             category: "Frontend",
         },
         {
             name: "CSS",
             slug: "css",
-            icon: "/images/skills/css.png",
+            icon: "/skills/css-3-svgrepo-com.svg",
             category: "Frontend",
         },
 
@@ -82,13 +71,13 @@ export default function useSkills() {
         {
             name: "React Native",
             slug: "react-native",
-            icon: "/images/skills/react-native.png",
+            icon: "/skills/react-javascript-js-framework-facebook-svgrepo-com.svg",
             category: "Mobile",
         },
         {
             name: "Expo",
             slug: "expo",
-            icon: "/images/skills/expo.png",
+            icon: "/skills/expo-svgrepo-com.svg",
             category: "Mobile",
         },
 
@@ -96,19 +85,13 @@ export default function useSkills() {
         {
             name: "MySQL",
             slug: "mysql",
-            icon: "/images/skills/mysql.png",
-            category: "Database",
-        },
-        {
-            name: "PostgreSQL",
-            slug: "postgresql",
-            icon: "/images/skills/postgresql.png",
+            icon: "/skills/mysql-svgrepo-com.svg",
             category: "Database",
         },
         {
             name: "Prisma",
             slug: "prisma",
-            icon: "/images/skills/prisma.png",
+            icon: "/skills/prisma-svgrepo-com.svg",
             category: "Database",
         },
 
@@ -116,13 +99,19 @@ export default function useSkills() {
         {
             name: "Docker",
             slug: "docker",
-            icon: "/images/skills/docker.png",
+            icon: "/skills/docker-svgrepo-com.svg",
+            category: "DevOps",
+        },
+        {
+            name: "Kubernates",
+            slug: "Kubernates",
+            icon: "/skills/kubernetes-svgrepo-com.svg",
             category: "DevOps",
         },
         {
             name: "Git",
             slug: "git",
-            icon: "/images/skills/git.png",
+            icon: "/skills/git-svgrepo-com.svg",
             category: "Tools",
         },
         {
@@ -132,19 +121,14 @@ export default function useSkills() {
             category: "Tools",
         },
 
-        // Services & Infrastructure
-        {
-            name: "Cloudinary",
-            slug: "cloudinary",
-            icon: "/images/skills/cloudinary.png",
-            category: "Services",
-        },
-        {
-            name: "MQTT",
-            slug: "mqtt",
-            icon: "/images/skills/mqtt.png",
-            category: "Services",
-        },
+       
+        // {
+        //     name: "MQTT",
+        //     slug: "mqtt",
+        //     icon: "/images/skills/mqtt.png",
+        //     category: "Services",
+        // },
+
     ];
 
     const categories = [

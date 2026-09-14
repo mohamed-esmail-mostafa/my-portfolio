@@ -1,20 +1,20 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 export default function Footer() {
+  const t = useTranslations('footer');
   const year = new Date().getFullYear();
 
   const links = [
-    { href: '#', label: 'Home' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#about', label: 'About' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#', label: t('home') },
+    { href: '#projects', label: t('projects') },
+    { href: '#about', label: t('about') },
+    { href: '#contact', label: t('contact') },
   ];
 
   return (
-    <footer style={{
-      borderTop: '1px solid var(--border)',
-      padding: '24px',
-    }}>
+    <footer style={{ borderTop: '1px solid var(--border)', padding: '24px' }}>
       <div style={{
         maxWidth: 1100,
         margin: '0 auto',
@@ -46,7 +46,7 @@ export default function Footer() {
         </nav>
 
         <p style={{ fontSize: 12, color: 'var(--text-muted)', letterSpacing: '0.03em' }}>
-          © {year} Mohamed Ismail
+          {t('copyright', { year })}
         </p>
       </div>
     </footer>

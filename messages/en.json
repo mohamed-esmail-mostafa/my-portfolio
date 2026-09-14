@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "name": "Mohamed Ismail",
+    "projects": "Projects",
+    "about": "About",
+    "stack": "Stack",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Full-Stack Developer",
+    "title": "Full-Stack Web & App Developer",
+    "description": "Hi, I'm Mohamed. I build modern web platforms, scalable SaaS products, mobile applications, and custom software that drive business growth.",
+    "cta_projects": "View Projects",
+    "cta_contact": "Let's Work Together"
+  },
+  "projects": {
+    "heading": "Selected Work",
+    "view_case": "View Case Study"
+  },
+  "stack": {
+    "heading": "Tech Stack"
+  },
+  "about": {
+    "heading": "About",
+    "bio": "Passionate developer focused on building scalable products, solving complex problems, and turning ideas into impactful software.",
+    "services_heading": "Core Services"
+  },
+  "contact": {
+    "heading": "Have an idea?",
+    "subheading": "Let's build it.",
+    "email_label": "Email Me",
+    "cta": "Start a Project"
+  },
+  "footer": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "copyright": "© {year} Mohamed Ismail"
+  }
+}

@@ -1,26 +1,26 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import useSkills from '@/hooks/use-skills';
 
+const iconMap: Record<string, string> = {
+  Laravel: '/skills/nest-middleware-js-svgrepo-com.svg',
+  React: '/skills/react-javascript-js-framework-facebook-svgrepo-com.svg',
+  'React Native': '/skills/react-svgrepo-com.svg',
+  NestJS: '/skills/nest-middleware-js-svgrepo-com.svg',
+  'Node.js': '/skills/node-js-svgrepo-com.svg',
+  MySQL: '/skills/mysql-svgrepo-com.svg',
+  PostgreSQL: '/skills/nextjs-svgrepo-com.svg',
+  Docker: '/skills/docker-svgrepo-com.svg',
+};
+
+const FEATURED = ['Laravel', 'React', 'React Native', 'NestJS', 'Node.js', 'MySQL', 'PostgreSQL', 'Docker'];
+
 export default function TechStack() {
-  const { skills, categories } = useSkills();
-
-  // Show a curated subset matching the design
-  const featured = ['Laravel', 'React', 'React Native', 'NestJS', 'Node.js', 'MySQL', 'PostgreSQL', 'Docker'];
-  const featuredSkills = skills.filter((s) => featured.includes(s.name));
-
-  // Map skill icons to available SVG files
-  const iconMap: Record<string, string> = {
-    Laravel: '/skills/nest-middleware-js-svgrepo-com.svg', // placeholder
-    React: '/skills/react-javascript-js-framework-facebook-svgrepo-com.svg',
-    'React Native': '/skills/react-svgrepo-com.svg',
-    NestJS: '/skills/nest-middleware-js-svgrepo-com.svg',
-    'Node.js': '/skills/node-js-svgrepo-com.svg',
-    MySQL: '/skills/mysql-svgrepo-com.svg',
-    PostgreSQL: '/skills/nextjs-svgrepo-com.svg',
-    Docker: '/skills/docker-svgrepo-com.svg',
-  };
+  const t = useTranslations('stack');
+  const { skills } = useSkills();
+  const featuredSkills = skills.filter((s) => FEATURED.includes(s.name));
 
   return (
     <section id="stack" style={{ padding: '100px 24px', borderTop: '1px solid var(--border)' }}>
@@ -34,7 +34,7 @@ export default function TechStack() {
           color: 'var(--text-primary)',
           marginBottom: 60,
         }}>
-          Tech Stack
+          {t('heading')}
         </h2>
 
         <div style={{
@@ -42,7 +42,8 @@ export default function TechStack() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
           gap: 12,
         }}>
-          {featuredSkills.map((skill) => (
+
+          {skills.map((skill) => (
             <div
               key={skill.slug}
               style={{
@@ -68,24 +69,21 @@ export default function TechStack() {
             >
               <div style={{ width: 36, height: 36, position: 'relative', flexShrink: 0 }}>
                 <Image
-                  src={iconMap[skill.name] || '/skills/react-svgrepo-com.svg'}
+                  src={skill.icon}
                   alt={skill.name}
                   fill
                   style={{ objectFit: 'contain' }}
                   sizes="36px"
                 />
               </div>
-              <span style={{
-                fontSize: 12,
-                fontWeight: 500,
-                color: 'var(--text-secondary)',
-                textAlign: 'center',
-                letterSpacing: '0.02em',
-              }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-secondary)', textAlign: 'center' }}>
                 {skill.name}
               </span>
             </div>
           ))}
+
+
+         
         </div>
       </div>
     </section>

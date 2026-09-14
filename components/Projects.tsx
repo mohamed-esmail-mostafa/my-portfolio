@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import useProjects from '@/hooks/use-projects';
 import { Project } from '@/types/project';
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, viewLabel }: { project: Project; viewLabel: string }) {
   return (
     <div
       style={{
@@ -24,7 +25,6 @@ function ProjectCard({ project }: { project: Project }) {
         (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
       }}
     >
-      {/* Image */}
       <div style={{ position: 'relative', aspectRatio: '16/10', overflow: 'hidden', background: '#0d0d0d' }}>
         <Image
           src={project.images[0]}
@@ -35,14 +35,11 @@ function ProjectCard({ project }: { project: Project }) {
         />
       </div>
 
-      {/* Content */}
       <div style={{ padding: '20px 20px 16px' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8, marginBottom: 8 }}>
-          <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.3, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-            {project.name}
-            <span style={{ color: 'var(--text-muted)', fontWeight: 400, marginLeft: 8 }}>— {project.category}</span>
-          </h3>
-        </div>
+        <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.3, textTransform: 'uppercase', letterSpacing: '0.03em', marginBottom: 8 }}>
+          {project.name}
+          <span style={{ color: 'var(--text-muted)', fontWeight: 400, marginLeft: 8 }}>— {project.category}</span>
+        </h3>
 
         <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 14 }}>
           {project.description}
@@ -78,6 +75,7 @@ function ProjectCard({ project }: { project: Project }) {
             textTransform: 'uppercase',
             cursor: 'pointer',
             transition: 'all 0.2s',
+            fontFamily: 'inherit',
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-hover)';
@@ -88,7 +86,7 @@ function ProjectCard({ project }: { project: Project }) {
             (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
           }}
         >
-          View Case Study
+          {viewLabel}
         </button>
       </div>
     </div>
@@ -96,6 +94,7 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default function Projects() {
+  const t = useTranslations('projects');
   const { featuredProjects } = useProjects();
 
   return (
@@ -110,7 +109,7 @@ export default function Projects() {
           color: 'var(--text-primary)',
           marginBottom: 60,
         }}>
-          Selected Work
+          {t('heading')}
         </h2>
 
         <div style={{
@@ -119,7 +118,7 @@ export default function Projects() {
           gap: 20,
         }}>
           {featuredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+            <ProjectCard key={project.slug} project={project} viewLabel={t('view_case')} />
           ))}
         </div>
       </div>

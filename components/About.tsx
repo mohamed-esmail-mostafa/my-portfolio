@@ -1,9 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import useServices from '@/hooks/use-services';
 
 export default function About() {
+  const t = useTranslations('about');
   const { featuredServices } = useServices();
 
   return (
@@ -17,15 +19,16 @@ export default function About() {
           color: 'var(--text-primary)',
           marginBottom: 48,
         }}>
-          About
+          {t('heading')}
         </h2>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'auto 1fr',
-          gap: 48,
-          alignItems: 'start',
-        }}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'auto 1fr',
+            gap: 48,
+            alignItems: 'start',
+          }}
           className="about-grid"
         >
           {/* Profile image */}
@@ -56,8 +59,7 @@ export default function About() {
               marginBottom: 32,
               maxWidth: 560,
             }}>
-              Passionate developer focused on building scalable products, solving
-              complex problems, and turning ideas into impactful software.
+              {t('bio')}
             </p>
 
             <p style={{
@@ -68,7 +70,7 @@ export default function About() {
               color: 'var(--text-primary)',
               marginBottom: 16,
             }}>
-              Core Services
+              {t('services_heading')}
             </p>
 
             <div style={{
@@ -95,9 +97,7 @@ export default function About() {
 
       <style>{`
         @media (max-width: 640px) {
-          .about-grid {
-            grid-template-columns: 1fr !important;
-          }
+          .about-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>
