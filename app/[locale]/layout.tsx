@@ -18,13 +18,118 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isAr = locale === 'ar';
+
+
+  const title = isAr
+    ? 'محمد إسماعيل | مطور Full-Stack'
+    : 'Mohamed Ismail | Full-Stack Developer';
+
+  const description = isAr
+    ? 'محمد إسماعيل، مطور Full-Stack متخصص في تطوير مواقع الويب وتطبيقات الجوال ومنصات SaaS والحلول البرمجية الحديثة.'
+    : 'Mohamed Ismail is a Full-Stack Developer specializing in modern web applications, mobile apps, SaaS platforms, and scalable software solutions.';
+
   return {
-    title: isAr
-      ? 'محمد إسماعيل — مطور متكامل'
-      : 'Mohamed Ismail — Full-Stack Developer',
-    description: isAr
-      ? 'مطور ويب وتطبيقات متكامل يبني منصات حديثة ومنتجات SaaS وتطبيقات جوال.'
-      : 'Full-Stack Web & App Developer building modern platforms, SaaS products, and mobile apps.',
+    metadataBase: new URL('https://mohamed-esmail-theta.vercel.app/'),
+    title: {
+      default: title,
+      template: `%s | Mohamed Ismail`,
+    },
+    description,
+
+    keywords: isAr
+      ? [
+        'محمد إسماعيل',
+        'مطور Full Stack',
+        'مطور ويب',
+        'مطور تطبيقات',
+        'مطور Laravel',
+        'مطور React',
+        'مطور Next.js',
+        'تطوير مواقع',
+        'تطوير تطبيقات',
+        'برمجة',
+      ]
+      : [
+        'Mohamed Ismail',
+        'Full Stack Developer',
+        'Web Developer',
+        'Laravel Developer',
+        'React Developer',
+        'Next.js Developer',
+        'Software Developer',
+        'Mobile App Developer',
+      ],
+
+    authors: [
+      {
+        name: 'Mohamed Ismail',
+      },
+    ],
+
+
+
+
+    creator: 'Mohamed Ismail',
+
+    alternates: {
+      canonical: `/${locale}`,
+
+      languages: {
+        en: '/en',
+        ar: '/ar',
+      },
+    },
+
+
+    openGraph: {
+      type: 'website',
+      siteName: 'Mohamed Ismail',
+      title,
+      description,
+      url: `/${locale}`,
+
+      locale: isAr ? 'ar_EG' : 'en_US',
+
+      images: [
+        {
+          url: '/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-image.jpg'],
+    },
+
+
+
+    robots: {
+      index: true,
+      follow: true,
+
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+    },
+
+
+
+    icons: {
+      icon: '/favicon.ico',
+      shortcut: '/favicon.ico',
+      apple: '/apple-icon.png',
+    },
+
+
+
+
   };
 }
 
