@@ -4,87 +4,114 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import useSkills from '@/hooks/use-skills';
 
-const iconMap: Record<string, string> = {
-  Laravel: '/skills/nest-middleware-js-svgrepo-com.svg',
-  React: '/skills/react-javascript-js-framework-facebook-svgrepo-com.svg',
-  'React Native': '/skills/react-svgrepo-com.svg',
-  NestJS: '/skills/nest-middleware-js-svgrepo-com.svg',
-  'Node.js': '/skills/node-js-svgrepo-com.svg',
-  MySQL: '/skills/mysql-svgrepo-com.svg',
-  PostgreSQL: '/skills/nextjs-svgrepo-com.svg',
-  Docker: '/skills/docker-svgrepo-com.svg',
-};
-
-const FEATURED = ['Laravel', 'React', 'React Native', 'NestJS', 'Node.js', 'MySQL', 'PostgreSQL', 'Docker'];
-
 export default function TechStack() {
   const t = useTranslations('stack');
   const { skills } = useSkills();
-  const featuredSkills = skills.filter((s) => FEATURED.includes(s.name));
 
   return (
-    <section id="stack" style={{ padding: '100px 24px', borderTop: '1px solid var(--border)' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <h2 style={{
-          fontSize: 'clamp(24px, 4vw, 36px)',
-          fontWeight: 800,
-          textAlign: 'center',
-          textTransform: 'uppercase',
-          letterSpacing: '0.06em',
-          color: 'var(--text-primary)',
-          marginBottom: 60,
-        }}>
-          {t('heading')}
-        </h2>
+    <section
+      id="stack"
+      className="border-t border-[var(--border)] px-6 py-24 sm:py-28 lg:py-32"
+    >
+      <div className="mx-auto max-w-[1100px]">
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
-          gap: 12,
-        }}>
+        {/* Section Header */}
+        <div className="mb-14 text-center sm:mb-16">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            Technologies
+          </p>
 
+          <h2 className="text-3xl font-extrabold uppercase tracking-tight text-[var(--text-primary)] sm:text-4xl">
+            {t('heading')}
+          </h2>
+
+          <div className="mx-auto mt-5 h-px w-12 bg-primary" />
+        </div>
+
+        {/* Skills Grid */}
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {skills.map((skill) => (
             <div
               key={skill.slug}
-              style={{
-                background: 'var(--bg-card)',
-                border: '1px solid var(--border)',
-                borderRadius: 12,
-                padding: '24px 16px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: 12,
-                transition: 'border-color 0.2s, background 0.2s',
-                cursor: 'default',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)';
-                (e.currentTarget as HTMLElement).style.background = 'var(--accent-dim)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-                (e.currentTarget as HTMLElement).style.background = 'var(--bg-card)';
-              }}
+              className="
+                group relative flex min-h-[150px] flex-col
+                items-center justify-center
+                overflow-hidden rounded-2xl
+                border border-[var(--border)]
+                bg-[var(--bg-card)]
+                px-4 py-6
+                transition-all duration-300
+                hover:-translate-y-1
+                hover:border-primary/40
+                hover:bg-primary/[0.04]
+                hover:shadow-[0_12px_35px_rgba(238,163,81,0.08)]
+              "
             >
-              <div style={{ width: 36, height: 36, position: 'relative', flexShrink: 0 }}>
+              {/* Hover Glow */}
+              <div
+                className="
+                  pointer-events-none absolute -right-8 -top-8
+                  h-20 w-20 rounded-full
+                  bg-primary/0 blur-2xl
+                  transition-all duration-500
+                  group-hover:bg-primary/10
+                "
+              />
+
+              {/* Icon */}
+              <div
+                className="
+                  relative mb-5 flex h-12 w-12
+                  items-center justify-center
+                  rounded-xl border border-[var(--border)]
+                  bg-black/20
+                  p-2.5
+                  transition-all duration-300
+                  group-hover:border-primary/30
+                  group-hover:bg-primary/5
+                  group-hover:scale-105
+                "
+              >
                 <Image
                   src={skill.icon}
                   alt={skill.name}
                   fill
-                  style={{ objectFit: 'contain' }}
-                  sizes="36px"
+                  className="object-contain p-2"
+                  sizes="48px"
                 />
               </div>
-              <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-secondary)', textAlign: 'center' }}>
+
+              {/* Skill Name */}
+              <span
+                className="
+                  text-center text-xs font-medium
+                  text-[var(--text-secondary)]
+                  transition-colors duration-300
+                  group-hover:text-[var(--text-primary)]
+                "
+              >
                 {skill.name}
               </span>
+
+              {/* Bottom Accent */}
+              <div
+                className="
+                  absolute bottom-0 left-1/2
+                  h-[2px] w-0
+                  -translate-x-1/2
+                  bg-primary
+                  transition-all duration-300
+                  group-hover:w-8
+                "
+              />
             </div>
           ))}
-
-
-         
         </div>
+
+        {/* Bottom Text */}
+        <p className="mx-auto mt-10 max-w-xl text-center text-xs leading-6 text-[var(--text-muted)]">
+          {t('description')}
+        </p>
       </div>
     </section>
   );

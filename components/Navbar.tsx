@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
 import Logo from './Logo';
+import { Menu,X } from 'lucide-react';
 
 export default function Navbar() {
   const t = useTranslations('nav');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState('');
-
+  console.log(active)
   const navLinks = [
     { href: '#projects', label: t('projects') },
     { href: '#about', label: t('about') },
@@ -25,72 +26,26 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        transition: 'background 0.3s, border-color 0.3s',
-        background: scrolled ? 'rgba(10,10,10,0.9)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-      }}
+    <header className={`fixed inset-x-0 top-0 z-[100] border-b transition-all duration-300 ${scrolled
+        ? 'border-(--border) bg-black/90 backdrop-blur-md'
+        : 'border-transparent bg-transparent'
+      }`}
+
     >
-      <div style={{
-        maxWidth: 1100,
-        margin: '0 auto',
-        padding: '0 24px',
-        height: 60,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 16,
-      }}>
-        {/* <span style={{
-          fontSize: 14,
-          fontWeight: 600,
-          letterSpacing: '0.06em',
-          color: 'var(--text-primary)',
-          textTransform: 'uppercase',
-          flexShrink: 0,
-        }}>
-          {t('name')}
-        </span> */}
+      <div className='container m-auto flex justify-between items-center'
+
+      >
+
         <Logo />
 
         {/* Desktop nav */}
         <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }} className="hide-mobile">
           {navLinks.map((link) => (
             <a
+              className={` px-3 py-1 hover:bg-primary rounded-md ${active === link.href ? 'bg-primary' : 'bg-transparent'} `}
               key={link.href}
               href={link.href}
               onClick={() => setActive(link.href)}
-              style={{
-                padding: '6px 14px',
-                borderRadius: 6,
-                fontSize: 13,
-                fontWeight: 500,
-                letterSpacing: '0.05em',
-                textDecoration: 'none',
-                textTransform: 'uppercase',
-                color: active === link.href ? '#000' : 'var(--text-secondary)',
-                background: active === link.href ? 'var(--accent)' : 'transparent',
-                transition: 'all 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                if (active !== link.href) {
-                  (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-                  (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (active !== link.href) {
-                  (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
-                  (e.currentTarget as HTMLElement).style.background = 'transparent';
-                }
-              }}
             >
               {link.label}
             </a>
@@ -108,9 +63,11 @@ export default function Navbar() {
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
               {menuOpen ? (
-                <path fillRule="evenodd" clipRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
+                <Menu />
+                
               ) : (
-                <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
+              <X />
+                
               )}
             </svg>
           </button>

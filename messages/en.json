@@ -15,7 +15,8 @@
   },
   "projects": {
     "heading": "Selected Work",
-    "view_case": "View Case Study"
+    "view_case": "View Case Study",
+    "visit_project":"VISIT PROJECT"
   },
   "stack": {
     "heading": "Tech Stack"
@@ -26,10 +27,17 @@
     "services_heading": "Core Services"
   },
   "contact": {
-    "heading": "Have an idea?",
-    "subheading": "Let's build it.",
-    "email_label": "Email Me",
-    "cta": "Start a Project"
+    "label": "Get in touch",
+    "heading": "Let's build",
+    "subheading": "something great together.",
+    "description": "Have a project in mind or looking for a developer to join your team? I'd love to hear about it and discuss how I can help.",
+    "email_label": "Email",
+    "phone_label": "Phone",
+    "whatsapp_label": "WhatsApp",
+    "address_label": "Location",
+    "cta_heading": "Have a project in mind?",
+    "cta_description": "Let's turn your idea into a modern, scalable digital product.",
+    "cta": "Start a conversation"
   },
   "footer": {
     "home": "Home",
