@@ -1,72 +1,194 @@
+'use client';
+
+import Image from 'next/image';
+import { ArrowUpRight } from 'lucide-react';
 import { Project } from '@/types/project';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-
-export default function ProjectCard({ project, viewLabel }: { project: Project; viewLabel: string }) {
-
-  const t = useTranslations('projects');
-
+export default function ProjectCard({
+  project,
+  viewLabel,
+}: {
+  project: Project;
+  viewLabel: string;
+}) {
+    const t = useTranslations('projects');
   return (
-    <div
-      style={{
-        background: 'var(--bg-card)',
-        border: '1px solid var(--border)',
-        borderRadius: 12,
-        overflow: 'hidden',
-        transition: 'border-color 0.2s, transform 0.2s',
-        cursor: 'default',
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-hover)';
-        (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-        (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-      }}
+    <article
+      className="
+        group overflow-hidden
+        rounded-2xl
+        border border-[var(--border)]
+        bg-[var(--bg-card)]
+        transition-all duration-500
+        hover:-translate-y-1
+        hover:border-primary/30
+        hover:shadow-[0_20px_50px_rgba(0,0,0,0.25)]
+      "
     >
-      <div style={{ position: 'relative', aspectRatio: '16/10', overflow: 'hidden', background: '#0d0d0d' }}>
+      {/* Image */}
+      <div
+        className="
+          relative aspect-[16/10]
+          overflow-hidden
+          bg-[#0d0d0d]
+        "
+      >
         <Image
           src={project.images[0]}
           alt={project.name}
           fill
-          style={{ objectFit: 'cover' }}
-          sizes="(max-width: 640px) 100vw, 50vw"
+          className="
+            object-cover
+            transition-transform duration-700
+            ease-out
+            group-hover:scale-105
+          "
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
+
+        {/* Image Overlay */}
+        <div
+          className="
+            absolute inset-0
+            bg-gradient-to-t
+            from-black/60
+            via-transparent
+            to-transparent
+            opacity-70
+            transition-opacity duration-500
+            group-hover:opacity-90
+          "
+        />
+
+        {/* Category */}
+        <div className="absolute left-4 top-4">
+          <span
+            className="
+              rounded-full
+              border border-white/10
+              bg-black/60
+              px-3 py-1.5
+              text-[10px] font-semibold
+              uppercase tracking-[0.12em]
+              text-white/80
+              backdrop-blur-md
+            "
+          >
+            {project.category}
+          </span>
+        </div>
+
+        {/* Project Number */}
+        <div
+          className="
+            absolute bottom-4 right-4
+            text-[10px] font-medium
+            uppercase tracking-[0.15em]
+            text-white/40
+          "
+        >
+          {project.slug}
+        </div>
       </div>
 
-      <div style={{ padding: '20px 20px 16px' }}>
-        <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.3, textTransform: 'uppercase', letterSpacing: '0.03em', marginBottom: 8 }}>
-          {project.name}
-          <span style={{ color: 'var(--text-muted)', fontWeight: 400, marginLeft: 8 }}>— {project.category}</span>
-        </h3>
+      {/* Content */}
+      <div className="p-5 sm:p-6">
+        {/* Title */}
+        <div className="mb-3">
+          <h3
+            className="
+              text-lg font-bold
+              tracking-tight
+              text-[var(--text-primary)]
+              transition-colors duration-300
+              group-hover:text-primary
+            "
+          >
+            {project.name}
+          </h3>
+        </div>
 
-        <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 14 }}>
+        {/* Description */}
+        <p
+          className="
+            mb-5
+            line-clamp-2
+            text-sm
+            leading-6
+            text-[var(--text-secondary)]
+          "
+        >
           {project.description}
         </p>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
+        {/* Technologies */}
+        <div className="mb-6 flex flex-wrap gap-2">
           {project.technologies.slice(0, 5).map((tech) => (
-            <span key={tech} style={{
-              fontSize: 11,
-              padding: '3px 8px',
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              color: 'var(--text-muted)',
-              letterSpacing: '0.03em',
-            }}>
+            <span
+              key={tech}
+              className="
+                rounded-md
+                border border-[var(--border)]
+                bg-white/[0.025]
+                px-2.5 py-1
+                text-[10px] font-medium
+                tracking-wide
+                text-[var(--text-muted)]
+                transition-colors duration-300
+                group-hover:border-primary/20
+                group-hover:text-[var(--text-secondary)]
+              "
+            >
               {tech}
             </span>
           ))}
+
+          {project.technologies.length > 5 && (
+            <span
+              className="
+                rounded-md
+                border border-[var(--border)]
+                px-2.5 py-1
+                text-[10px]
+                text-[var(--text-muted)]
+              "
+            >
+              +{project.technologies.length - 5}
+            </span>
+          )}
         </div>
 
-        <button className='bg-primary text-white w-full py-3 h-9 rounded-lg'
+        {/* CTA */}
+        <button
+          type="button"
+          className="
+            group/button
+            flex h-11 w-full
+            items-center justify-center gap-2
+            rounded-lg
+            border border-[var(--border)]
+            bg-white/[0.02]
+            text-xs font-semibold
+            uppercase tracking-[0.08em]
+            text-[var(--text-primary)]
+            transition-all duration-300
+            hover:border-primary
+            hover:bg-primary
+            hover:text-black
+          "
         >
+          <span>{t("visit_project")}</span>
 
-          {t('visit_project')}
+          <ArrowUpRight
+            className="
+              h-4 w-4
+              transition-transform duration-300
+              group-hover/button:translate-x-0.5
+              group-hover/button:-translate-y-0.5
+            "
+          />
         </button>
       </div>
-    </div>
-  )
+    </article>
+  );
 }

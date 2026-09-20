@@ -1,125 +1,40 @@
 'use client';
 
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import useProjects from '@/hooks/use-projects';
-import { Project } from '@/types/project';
 import ProjectCard from './ProjectCard';
-
-// function ProjectCard({ project, viewLabel }: { project: Project; viewLabel: string }) {
-//   return (
-//     <div
-//       style={{
-//         background: 'var(--bg-card)',
-//         border: '1px solid var(--border)',
-//         borderRadius: 12,
-//         overflow: 'hidden',
-//         transition: 'border-color 0.2s, transform 0.2s',
-//         cursor: 'default',
-//       }}
-//       onMouseEnter={(e) => {
-//         (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-hover)';
-//         (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
-//       }}
-//       onMouseLeave={(e) => {
-//         (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-//         (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-//       }}
-//     >
-//       <div style={{ position: 'relative', aspectRatio: '16/10', overflow: 'hidden', background: '#0d0d0d' }}>
-//         <Image
-//           src={project.images[0]}
-//           alt={project.name}
-//           fill
-//           style={{ objectFit: 'cover' }}
-//           sizes="(max-width: 640px) 100vw, 50vw"
-//         />
-//       </div>
-
-//       <div style={{ padding: '20px 20px 16px' }}>
-//         <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.3, textTransform: 'uppercase', letterSpacing: '0.03em', marginBottom: 8 }}>
-//           {project.name}
-//           <span style={{ color: 'var(--text-muted)', fontWeight: 400, marginLeft: 8 }}>— {project.category}</span>
-//         </h3>
-
-//         <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 14 }}>
-//           {project.description}
-//         </p>
-
-//         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
-//           {project.technologies.slice(0, 5).map((tech) => (
-//             <span key={tech} style={{
-//               fontSize: 11,
-//               padding: '3px 8px',
-//               background: 'rgba(255,255,255,0.05)',
-//               border: '1px solid var(--border)',
-//               borderRadius: 4,
-//               color: 'var(--text-muted)',
-//               letterSpacing: '0.03em',
-//             }}>
-//               {tech}
-//             </span>
-//           ))}
-//         </div>
-
-//         <button
-//           style={{
-//             width: '100%',
-//             padding: '9px 0',
-//             background: 'transparent',
-//             border: '1px solid var(--border)',
-//             borderRadius: 6,
-//             color: 'var(--text-secondary)',
-//             fontSize: 11,
-//             fontWeight: 600,
-//             letterSpacing: '0.08em',
-//             textTransform: 'uppercase',
-//             cursor: 'pointer',
-//             transition: 'all 0.2s',
-//             fontFamily: 'inherit',
-//           }}
-//           onMouseEnter={(e) => {
-//             (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-hover)';
-//             (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-//           }}
-//           onMouseLeave={(e) => {
-//             (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-//             (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
-//           }}
-//         >
-//           {viewLabel}
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
 
 export default function Projects() {
   const t = useTranslations('projects');
   const { featuredProjects } = useProjects();
 
   return (
-    <section id="projects" style={{ padding: '100px 24px' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <h2 style={{
-          fontSize: 'clamp(24px, 4vw, 36px)',
-          fontWeight: 800,
-          textAlign: 'center',
-          textTransform: 'uppercase',
-          letterSpacing: '0.06em',
-          color: 'var(--text-primary)',
-          marginBottom: 60,
-        }}>
-          {t('heading')}
-        </h2>
+    <section
+      id="projects"
+      className="border-t border-[var(--border)] px-6 py-24 sm:py-28 lg:py-32"
+    >
+      <div className="mx-auto max-w-[1100px]">
+        {/* Section Header */}
+        <div className="mb-14 text-center sm:mb-16">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            {t('label') || 'Selected Work'}
+          </p>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: 20,
-        }}>
+          <h2 className="text-3xl font-extrabold uppercase tracking-tight text-[var(--text-primary)] sm:text-4xl">
+            {t('heading')}
+          </h2>
+
+          <div className="mx-auto mt-5 h-px w-12 bg-primary" />
+        </div>
+
+        {/* Projects */}
+        <div className="grid gap-5 md:grid-cols-2">
           {featuredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} viewLabel={t('view_case')} />
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              viewLabel={t('view_case')}
+            />
           ))}
         </div>
       </div>
