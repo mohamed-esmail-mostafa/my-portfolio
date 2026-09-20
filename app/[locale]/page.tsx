@@ -5,6 +5,7 @@ import TechStack from '@/components/TechStack';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import FloatContact from '@/components/FloatContact';
 
 export default function Home() {
 
@@ -49,6 +50,7 @@ export default function Home() {
         <TechStack />
         <About />
         <Contact />
+        <FloatContact />
       </main>
       <Footer />
     </>
