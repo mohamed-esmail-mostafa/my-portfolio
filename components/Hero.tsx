@@ -3,9 +3,12 @@
 import { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import useCurrentLang from '@/hooks/use-current-lang';
 
 export default function Hero() {
   const t = useTranslations('hero');
+  const {locale}=useCurrentLang()
 
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -232,7 +235,8 @@ export default function Hero() {
         className="
           pointer-events-none absolute
           left-1/2 top-[38%]
-          h-[500px] w-[500px]
+          h-125 
+          w-125
           -translate-x-1/2 -translate-y-1/2
           rounded-full
           bg-primary/[0.07]
@@ -260,37 +264,10 @@ export default function Hero() {
           text-center
         "
       >
-        {/* Badge */}
-        <div className="hero-badge mb-6">
-          <span
-            className="
-              inline-flex items-center gap-2
-              rounded-full
-              border border-primary/20
-              bg-primary/[0.06]
-              px-4 py-2
-              text-[11px] font-semibold
-              uppercase tracking-[0.2em]
-              text-primary
-            "
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_10px_rgba(238,163,81,0.8)]" />
-            {t('badge')}
-          </span>
-        </div>
+       
 
         {/* Heading */}
-        <h1
-          className="
-            hero-title
-            text-[clamp(42px,8vw,88px)]
-            font-extrabold
-            uppercase
-            leading-[0.95]
-            tracking-[-0.045em]
-            text-[var(--text-primary)]
-          "
-        >
+        <h1 className=" hero-title text-[clamp(42px,8vw,88px)] font-extrabold uppercase tracking-[-0.045em] text-(--text-primary)" >
           {t('title')}
         </h1>
 
@@ -299,10 +276,10 @@ export default function Hero() {
           className="
             hero-description
             mx-auto mt-7
-            max-w-[600px]
+            max-w-150
             text-[15px]
             leading-7
-            text-[var(--text-secondary)]
+            text-(--text-secondary)
             sm:text-[17px]
           "
         >
@@ -331,15 +308,16 @@ export default function Hero() {
           >
             {t('cta_projects')}
 
-            <span
+            {/* <span
               className="
                 ml-2
                 transition-transform duration-300
                 group-hover:translate-x-1
               "
             >
-              →
-            </span>
+            
+              {locale === "ar" ? <ArrowLeft /> : <ArrowRight />}
+            </span> */}
           </a>
 
           <a
@@ -366,7 +344,7 @@ export default function Hero() {
         </div>
 
         {/* Scroll indicator */}
-        <div
+        {/* <div
           className="
             hero-scroll
             mt-20
@@ -396,7 +374,7 @@ export default function Hero() {
               "
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

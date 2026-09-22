@@ -23,28 +23,6 @@ export default function LanguageSwitcher() {
       onClick={handleSwitch}
       disabled={isPending}
       className='px-3 py-1 hover:bg-primary text-white rounded-2xl'
-      // style={{
-      //   padding: '5px 12px',
-      //   background: 'transparent',
-      //   border: '1px solid var(--border-hover)',
-      //   borderRadius: 6,
-      //   color: 'var(--text-secondary)',
-      //   fontSize: 12,
-      //   fontWeight: 600,
-      //   letterSpacing: '0.08em',
-      //   cursor: 'pointer',
-      //   transition: 'all 0.2s',
-      //   opacity: isPending ? 0.5 : 1,
-      //   fontFamily: 'inherit',
-      // }}
-      // onMouseEnter={(e) => {
-      //   (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)';
-      //   (e.currentTarget as HTMLElement).style.color = 'var(--accent)';
-      // }}
-      // onMouseLeave={(e) => {
-      //   (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-hover)';
-      //   (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
-      // }}
       aria-label={`Switch to ${nextLocale === 'ar' ? 'Arabic' : 'English'}`}
     >
       {nextLocale === 'ar' ? 'عربي' : 'EN'}

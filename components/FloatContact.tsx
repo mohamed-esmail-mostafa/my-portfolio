@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+
 import { Phone, MessageCircle } from 'lucide-react';
 
 export default function FloatContact() {
@@ -15,8 +15,8 @@ export default function FloatContact() {
         className="
           group flex h-12 w-12 items-center justify-center
           rounded-full border border-[var(--border)]
-          bg-[#111]
-          text-[var(--text-secondary)]
+          bg-primary
+          text-white
           shadow-lg
           transition-all duration-300
           hover:-translate-y-1
@@ -35,8 +35,8 @@ export default function FloatContact() {
         className="
           group flex h-12 w-12 items-center justify-center
           rounded-full border border-[var(--border)]
-          bg-[#111]
-          text-[var(--text-secondary)]
+         bg-primary
+          text-white
           shadow-lg
           transition-all duration-300
           hover:-translate-y-1
